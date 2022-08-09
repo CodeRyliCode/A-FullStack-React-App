@@ -44,7 +44,7 @@ export default class App extends Component {
       <Switch>
         <Route exact path="/" component={Courses} />
         <PrivateRoute path="/courses/create" component={CreateCourseWithContext} />
-        {/* Redirect from /settings, from will be equal to pathname: "/settings".
+        {/* Redirect from /courses, from will be equal to pathname: "/courses".
         redirect from last route url you were on before signing in */}
         <PrivateRoute path="/courses/:id/update" component={UpdateCourseWithContext} />
         <Route path="/courses/:id" component={CourseDetailWithContext} />

@@ -9,7 +9,7 @@ export default (props) => {
     elements,
   } = props;
 
-  // Props are passed to this component – from a parent component like UserSignUp – to provide it the data it needs
+  // Props are passed to this component – from a parent component like SignUp – to provide it the data it needs
   function handleSubmit(event) {
     event.preventDefault();
     submit();

@@ -25,7 +25,7 @@ export default class Data {
   // The btoa() method creates a base-64 encoded ASCII string from a "string" of data.
   //  We'll use btoa() to encode the username and password credentials passed to the api() method. 
   //  The credentials will be passed as an object containing username and password properties.
-  const encodedCredentials = btoa(`${credentials.emailaddress}:${credentials.password}`);
+  const encodedCredentials = btoa(`${credentials.emailAddress}:${credentials.password}`);
 
   options.headers['Authorization'] = `Basic ${encodedCredentials}`;
 
@@ -34,8 +34,8 @@ export default class Data {
     return fetch(url, options);
   }
 
-  async getUser(emailaddress, password) { // add new parameters
-  const response = await this.api(`/users`, 'GET', null, true, { emailaddress, password });
+  async getUser(emailAddress, password) { // add new parameters
+  const response = await this.api(`/users`, 'GET', null, true, { emailAddress, password });
     if (response.status === 200) {
       return response.json().then(data => data);
     }
