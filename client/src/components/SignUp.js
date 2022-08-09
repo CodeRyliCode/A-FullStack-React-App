@@ -2,26 +2,27 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Form from './Form';
 
-export default class SignUp extends Component {
+export default class UserSignUp extends Component {
   state = {
-    name: '',
-    username: '',
+    firstname: '',
+    lastname: '',
+    emailaddress: '',
     password: '',
     errors: [],
   }
 
   render() {
     const {
-      name,
-      username,
+      firstname,
+      lastname,
+      emailaddress,
       password,
       errors,
     } = this.state;
 
     return (
-      <div className="bounds">
-        <div className="grid-33 centered signin">
-          <h1>Sign Up</h1>
+        <div className="form--centered">
+        <h1>Sign Up</h1>
           <Form 
             cancel={this.cancel}
             errors={errors}
@@ -30,33 +31,39 @@ export default class SignUp extends Component {
             elements={() => (
               <React.Fragment>
                 <input 
-                  id="name" 
-                  name="name" 
+                  id="firstname" 
+                  name="firstname" 
                   type="text"
-                  value={name} 
+                  value={firstname} 
                   onChange={this.change} 
-                  placeholder="Name" />
+                 />
                 <input 
-                  id="username" 
-                  name="username" 
+                  id="lastname" 
+                  name="lastname" 
                   type="text"
-                  value={username} 
+                  value={lastname} 
                   onChange={this.change} 
-                  placeholder="User Name" />
+                />
+                  <input 
+                  id="emailaddress" 
+                  name="emailaddress"
+                  type="emailaddress"
+                  value={emailaddress} 
+                  onChange={this.change} 
+                  />
                 <input 
                   id="password" 
                   name="password"
                   type="password"
                   value={password} 
                   onChange={this.change} 
-                  placeholder="Password" />
+                 />
               </React.Fragment>
             )} />
           <p>
             Already have a user account? <Link to="/signin">Click here</Link> to sign in!
           </p>
         </div>
-      </div>
     );
   }
 
@@ -75,16 +82,18 @@ export default class SignUp extends Component {
     const { context } = this.props;
 
     const {
-      name,
-      username,
+      firstname,
+      lastname,
+      emailaddress,
       password,
     } = this.state; 
 
 
     // New user payload
     const user = {
-      name,
-      username,
+        firstname,
+        lastname,
+        emailaddress,
       password,
     };
     // createUser() is an asynchronous operation that returns a promise. 
@@ -97,7 +106,7 @@ export default class SignUp extends Component {
       } else {
         // signIn() is an asynchronous operation that returns a promise. Once the promise 
         // is fulfilled (the user was authenticated), we'll navigate the user to the /authenticated URL path.
-        context.actions.signIn(username, password)
+        context.actions.signIn(emailaddress, password)
     // Once the authenticated user is in state, we'll push a new entry onto the history 
     // stack to navigate the user to the /authenticated route
         .then(() => {

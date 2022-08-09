@@ -44,8 +44,8 @@ export class Provider extends Component {
   }
 
   
-  signIn = async (username, password) => {
-    const user = await this.data.getUser(username, password);
+  signIn = async (emailAddress, password) => {
+    const user = await this.data.getUser(emailAddress, password);
     if (user !== null) {
       this.setState(() => {
         return {
@@ -59,7 +59,7 @@ export class Provider extends Component {
   }
 
   signOut = () => {
-    // This removes the name and username properties from state – 
+    // This removes the name and emailAddress properties from state – 
     // the user is no longer authenticated and cannot view the private components.
     this.setState(() => {
       return {

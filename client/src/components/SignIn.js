@@ -4,22 +4,22 @@ import Form from './Form';
 
 export default class SignIn extends Component {
   state = {
-    username: '',
+    emailAddress: '',
     password: '',
     errors: [],
   }
 
   render() {
     const {
-      username,
+        emailAddress,
       password,
       errors,
     } = this.state;
 
     return (
-      <div className="bounds">
-        <div className="grid-33 centered signin">
-          <h1>Sign In</h1>
+            <div className="form--centered">
+         <p className="header">Sign In</p>
+          <h1>Email Address</h1>
           <Form 
             cancel={this.cancel}
             errors={errors}
@@ -28,26 +28,26 @@ export default class SignIn extends Component {
             elements={() => (
               <React.Fragment>
                 <input 
-                  id="username" 
-                  name="username" 
-                  type="text"
-                  value={username} 
+               
+                  id="emailAddress" 
+                  name="emailAddress" 
+                  type="email"
+                  value={emailAddress} 
                   onChange={this.change} 
-                  placeholder="User Name" />
+                   />
                 <input 
                   id="password" 
                   name="password"
                   type="password"
                   value={password} 
                   onChange={this.change} 
-                  placeholder="Password" />                
+                  />                
               </React.Fragment>
             )} />
           <p>
             Don't have a user account? <Link to="/signup">Click here</Link> to sign up!
           </p>
         </div>
-      </div>
     );
   }
 
@@ -64,11 +64,11 @@ export default class SignIn extends Component {
 
   submit = () => {
     const { context } = this.props;
-    const { username, password } = this.state;
+    const { emailAddress, password } = this.state;
     const { from } = this.props.location.state || { from: { pathname: '/authenticated' } };
 
 
-    context.actions.signIn(username, password)
+    context.actions.signIn(emailAddress, password)
     .then(( user) => {
       if (user === null) {
         this.setState(() => {
@@ -76,7 +76,7 @@ export default class SignIn extends Component {
         });
         } else {
           this.props.history.push(from);
-          console.log(`SUCCESS! ${username} is now signed in!`);
+          console.log(`SUCCESS! ${emailAddress} is now signed in!`);
         }
     })
     .catch((err) => {
