@@ -60,6 +60,8 @@ export class Provider extends Component {
       this.setState(() => {
         return {
           authenticatedUser: user,
+          password: password
+
         };
       });
         // Set cookie

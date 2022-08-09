@@ -34,7 +34,7 @@ const CourseDetail = (props) => {
                 })
         })
         .catch(error => {
-            console.log('Error Fetching Data', error);
+            console.log('There was an Error Fetching Data', error);
         });
     }, [id]);
 
