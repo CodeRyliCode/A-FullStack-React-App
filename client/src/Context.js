@@ -6,6 +6,14 @@ import Cookies from 'js-cookie';
 const Context = React.createContext(); 
 
 export class Provider extends Component {
+
+
+    state ={
+        authenticatedUser: null,
+        password: null,
+    }
+
+
   // Initialize a new instance of the Data class inside the constructor() method. 
   // Assign it to a data property, with this.data:
   constructor() {
@@ -46,7 +54,9 @@ export class Provider extends Component {
   
   signIn = async (emailAddress, password) => {
     const user = await this.data.getUser(emailAddress, password);
+    const userPassword = password;
     if (user !== null) {
+        user.userPassword = userPassword;
       this.setState(() => {
         return {
           authenticatedUser: user,
