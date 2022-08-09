@@ -2,11 +2,20 @@
 
 // load modules
 const express = require('express');
+
+// Simple Usage (Enable All CORS Requests)
+const cors = require('cors')
+
+
 const morgan = require('morgan');
 const { sequelize } = require('./models');
 const routes = require('./routes');
 // create the Express app
 const app = express();
+
+// Simple Usage (Enable All CORS Requests)
+app.use(cors())
+
 // Setup request body JSON parsing.
 app.use(express.json());
 
