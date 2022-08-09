@@ -30,6 +30,7 @@ export default class UserSignUp extends Component {
             submitButtonText="Sign Up"
             elements={() => (
               <React.Fragment>
+              First Name
                 <input 
                   id="firstname" 
                   name="firstname" 
@@ -37,6 +38,7 @@ export default class UserSignUp extends Component {
                   value={firstname} 
                   onChange={this.change} 
                  />
+                 Last Name
                 <input 
                   id="lastname" 
                   name="lastname" 
@@ -44,6 +46,7 @@ export default class UserSignUp extends Component {
                   value={lastname} 
                   onChange={this.change} 
                 />
+                Email Address
                   <input 
                   id="emailaddress" 
                   name="emailaddress"
@@ -51,6 +54,7 @@ export default class UserSignUp extends Component {
                   value={emailaddress} 
                   onChange={this.change} 
                   />
+                  Password
                 <input 
                   id="password" 
                   name="password"
@@ -58,6 +62,8 @@ export default class UserSignUp extends Component {
                   value={password} 
                   onChange={this.change} 
                  />
+                    
+
               </React.Fragment>
             )} />
           <p>

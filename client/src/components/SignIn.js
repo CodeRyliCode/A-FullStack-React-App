@@ -18,8 +18,7 @@ export default class SignIn extends Component {
 
     return (
             <div className="form--centered">
-         <p className="header">Sign In</p>
-          <h1>Email Address</h1>
+          <h2>Sign In</h2>
           <Form 
             cancel={this.cancel}
             errors={errors}
@@ -27,14 +26,15 @@ export default class SignIn extends Component {
             submitButtonText="Sign In"
             elements={() => (
               <React.Fragment>
+              Email Address
                 <input 
-               
                   id="emailAddress" 
                   name="emailAddress" 
                   type="email"
                   value={emailAddress} 
                   onChange={this.change} 
                    />
+                   Password
                 <input 
                   id="password" 
                   name="password"

@@ -25,7 +25,7 @@ export default class Data {
   // The btoa() method creates a base-64 encoded ASCII string from a "string" of data.
   //  We'll use btoa() to encode the username and password credentials passed to the api() method. 
   //  The credentials will be passed as an object containing username and password properties.
-  const encodedCredentials = btoa(`${credentials.username}:${credentials.password}`);
+  const encodedCredentials = btoa(`${credentials.emailaddress}:${credentials.password}`);
 
   options.headers['Authorization'] = `Basic ${encodedCredentials}`;
 
@@ -34,8 +34,8 @@ export default class Data {
     return fetch(url, options);
   }
 
-  async getUser(username, password) { // add new parameters
-  const response = await this.api(`/users`, 'GET', null, true, { username, password });
+  async getUser(emailaddress, password) { // add new parameters
+  const response = await this.api(`/users`, 'GET', null, true, { emailaddress, password });
     if (response.status === 200) {
       return response.json().then(data => data);
     }
@@ -47,8 +47,8 @@ export default class Data {
     }
   }
   
-  async createUser(user) {
-    const response = await this.api('/users', 'POST', user);
+  async createUser(user, emailAddress, password) {
+    const response = await this.api('/users', 'POST', user, true, {emailAddress, password});
     if (response.status === 201) {
       return [];
     }
@@ -56,12 +56,40 @@ export default class Data {
       return response.json().then(data => {
         return data.errors;
       });
-    }
-    else {
+    }  else if (response.status === 401) {
+        return response.json().then(data => {
+          return data.errors;
+        })
+    } else {
       throw new Error();
     }
   }
+
+
+  async updateCourse(course, id, emailAddress, password) {
+    const response = await this.api(`/courses/${id}`, 'PUT', course, true, {emailAddress, password});
+    if (response.status === 204) {
+        return [];
+    } else if (response.status === 400) {
+        return response.json().then(data => {
+            return data.errors;
+        });
+    }  else {
+        throw new Error();
+    }
 }
 
-// The Data class in this file holds the methods you will use to create, sign up and authenticate a user.
-// Data is effectively a helper class that provides utility methods to allow the React client to talk to the Express server.
+
+async deleteCourse (id, emailAddress, password) {
+    const response = await this.api(`/courses/${id}`, 'DELETE', null, true, {emailAddress, password});
+    if (response.status === 204) {
+        return [];
+    } else if (response.status === 400) {
+        return response.json().then(data => {
+            return data.errors;
+        });
+    }  else {
+        throw new Error();
+    }
+}
+}
