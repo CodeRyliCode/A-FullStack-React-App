@@ -40,7 +40,7 @@ const CourseDetail = (props) => {
 
 
     const handleDelete = () => {
-        const emailAddress = context.authenticatedUser.username;
+        const emailAddress = context.authenticatedUser.emailAddress;
         const password = context.authenticatedUser.password;
         context.data.deleteCourse(id, emailAddress, password)
             .then(error => {

@@ -6,7 +6,7 @@ const UpdateCourse = (props) => {
     const history = useHistory();
     
     const { context } = props;
-    const emailAddress = context.authenticatedUser.username;
+    const emailAddress = context.authenticatedUser.emailAddress;
     const password = context.authenticatedUser.password;
     
     const [ course, getCourse ] = useState({
@@ -54,7 +54,7 @@ const UpdateCourse = (props) => {
                 if(errors.length) {
                     setErrors(errors);
             } else {
-                console.log('Course updated successfully')
+                console.log('Course updated successfully!')
                 history.push(`/`);
             }
         })
@@ -64,12 +64,6 @@ const UpdateCourse = (props) => {
         });   
     }
 
-    /*
-        * This function handles changes to the
-        * fields on the page. When there is a change
-        * to a field the course state will update
-        * with the new user defined values. 
-    */
     const handleChange = (e) => {
         let name = e.target.name;
         let value= e.target.value;
@@ -88,12 +82,7 @@ const UpdateCourse = (props) => {
         });
     }
 
-    /*
-        * This function handles functionality
-        * for the cancel button - a user will
-        * be redirected to the course detail page
-        * when they utilize cancel.
-    */
+ 
     const cancel = () => {
         history.push(`/courses/${id}`);
     }

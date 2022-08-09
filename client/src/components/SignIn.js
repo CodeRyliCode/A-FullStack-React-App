@@ -65,7 +65,11 @@ export default class SignIn extends Component {
   submit = () => {
     const { context } = this.props;
     const { emailAddress, password } = this.state;
-    const { from } = this.props.location.state || { from: { pathname: '/authenticated' } };
+    /* from = this.props.location.state 
+    means that once a user signs in , they will be redirected to the last page needing authentication, that they were on.
+    ie: http://localhost:3000/courses/create . If they were not last at a page needing authentication, then they will just
+    be directed to the home route '/' */
+    const { from } = this.props.location.state || { from: { pathname: '/' } };
 
 
     context.actions.signIn(emailAddress, password)
