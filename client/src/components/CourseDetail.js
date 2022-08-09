@@ -1,80 +1,108 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { Context } from '../Context';
-
-import {useParams, Link, useHistory} from "react-router-dom";
-import ReactMarkdown from  'react-markdown';
-
+import React, { useState, useEffect } from 'react';
+import { NavLink, useParams, useHistory } from 'react-router-dom';
+import ReactMarkDown from 'react-markdown';
 
 const CourseDetail = (props) => {
-    
-    const context =useContext(Context);
-    const history= useHistory();
-    const {authenticatedUser}= context;
-    const{ id } = useParams(); 
-    const[course, setCourse] = useState([]);
-    const [user, setUser] =useState([]);
+    const history = useHistory();
+    const { context } = props;
+    const authUser = context.authenticatedUser;
 
-    //fetches a single course by id
-    useEffect(()=>{
-        context.data.fetchCourse(id)
-        .then(res =>{ 
-            setCourse(res);
-            setUser(res.User);
-        }) 
-    },[context.data, id]);//updates everytime it changes
+    const [ course, getCourse ] = useState({
+        course: [],
+        title: " ",
+        description: " ",
+        estimatedTime: " ",
+        materialsNeeded: " ",
+        firstName: " ",
+        lastName: " "
+    });
+    const { id } = useParams();
 
-    //Deletes the selected course
-    const handleDelete = () =>{
-        const emailAddress = authenticatedUser.emailAddress;
-        const password =authenticatedUser.clientPassword;
+
+    useEffect(() => {
+        fetch(`http://localhost:5000/api/courses/${id}`, { method: 'GET' })
+            .then(res => res.json())
+            .then(response => {
+                getCourse({
+                    course: response,
+                    title: response.title,
+                    description: response.description,
+                    estimatedTime: response.estimatedTime,
+                    materialsNeeded: response.materialsNeeded,
+                    firstName: response.User.firstName,
+                    lastName: response.User.lastName
+                })
+        })
+        .catch(error => {
+            console.log('Error Fetching Data', error);
+        });
+    }, [id]);
+
+
+    const handleDelete = () => {
+        const emailAddress = context.authenticatedUser.username;
+        const password = context.authenticatedUser.password;
         context.data.deleteCourse(id, emailAddress, password)
-            .then(
-                console.log('Course Deleted'),
-                history.push('')
-            )
+            .then(error => {
+                if(error.length) {
+                    console.log('Could not delete course');
+            } else {
+                console.log('Course successfully deleted!')
+                history.push('/');
+            }
+        })
+        .catch(err => {
+            console.log('error:', err);
+        });
     }
+    
+    const actionButtons = 
+        <div className="actions--bar">
+            <div className="wrap">
+                {authUser && course.course.userId === context.authenticatedUser.id ?
+                    <React.Fragment>
+                        <NavLink to={`/courses/${course.course.id}/update`} className="button">Update Course</NavLink>
+                        <NavLink to={`/courses/${course.course.id}/delete`} className="button" onClick={handleDelete}>Delete Course</NavLink>
+                        <NavLink to="/" className="button button-secondary">Return to List</NavLink>
+                    </React.Fragment>
+                    :
+                    <React.Fragment>
+                        <NavLink to="/" className="button button-secondary">Return to List</NavLink>
+                    </React.Fragment>
+                }
+            </div>
+        </div>;
+    
 
-//renders the course details  and update screen 
-return(
-    <main>
-    <div className="actions--bar">
+    const courseDetails = 
         <div className="wrap">
-        {authenticatedUser && course.userId === authenticatedUser.id?(
-        <React.Fragment>
-            <Link className="button" to={`/courses/${id}/update`}>Update Course</Link>
-            <button className="button" onClick={handleDelete}>Delete Course</button>
-            <Link className="button button-secondary" to='/'>Return to List</Link>
-        </React.Fragment>
-        ) :(  
-            <Link className="button button-secondary" to='/'>Return to List</Link>
-        )} 
-        </div>
-    </div>
-    <div className="wrap">
         <h2>Course Detail</h2>
-        <form>
+            <form>
             <div className="main--flex">
                 <div>
                     <h3 className="course--detail--title">Course</h3>
                     <h4 className="course--name">{course.title}</h4>
-                    <p>By:{user.firstName} {user.lastName}</p>
-                    <ReactMarkdown>
-                        {course.description}
-                        </ReactMarkdown>
+                    <p>{ `By ${course.firstName} ${course.lastName}` }</p>
+                    <ReactMarkDown children={`${course.description}`}/>
                 </div>
                 <div>
-                    <h3 className="course--detail--title">Estimated Time</h3>
+                <h3 className="course--detail--title">Estimated Time</h3>
                     <p>{course.estimatedTime}</p>
 
-                    <h3 className="course--detail--title">Materials Needed</h3>
-                    <ReactMarkdown>
-                        {course.materialsNeeded}
-                    </ReactMarkdown>
+                <h3 className="course--detail--title">Materials Needed</h3>
+                        <ReactMarkDown children={`${course.materialsNeeded}`}/>
+                            <ul className="course--detail--list" />
                 </div>
             </div>
-        </form>
-    </div>
-</main>
-)
-};
+            </form>
+        </div>;
+
+    return (
+            <main>
+                {actionButtons}
+                {courseDetails}
+            </main>
+    );
+}
+
 export default CourseDetail;

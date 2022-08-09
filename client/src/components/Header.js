@@ -17,7 +17,7 @@
                {authUser ? (
                  <React.Fragment>
                    <ul className="header--signedin">
-                     <span>Welcome, {authUser.firstname}!</span>
+                     <span>Welcome, {authUser.firstName}!</span>
                      <li>
                        <Link to="/signout">Sign Out</Link>
                      </li>
