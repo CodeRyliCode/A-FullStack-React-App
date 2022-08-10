@@ -1,6 +1,7 @@
-import React, { useState  } from 'react';
+import React, { useState, useEffect  } from 'react';
 import {useHistory} from 'react-router-dom';
 import Form from './Form'
+
 
 const CreateCourse = (props) => { 
     const history = useHistory();
@@ -8,6 +9,7 @@ const CreateCourse = (props) => {
     const { context } = props;
 
     const userId = context.authenticatedUser.id;
+   
     
     const [ course, setCourse ] = useState({
         title: " ",
@@ -18,9 +20,11 @@ const CreateCourse = (props) => {
     const [ errors, setErrors ] = useState([]);
 
 
+
     const submit = () => {
-        const emailAddress = context.authenticatedUser.username;
-        const password = context.authenticatedUser.userPassword;
+
+        const emailAddress = context.authenticatedUser.emailAddress;
+        const password = context.authenticatedUser.password;
 
         const newCourse = {
             title,
@@ -29,7 +33,6 @@ const CreateCourse = (props) => {
             materialsNeeded,
             userId
         }
-
 
         context.data.createCourse(newCourse, emailAddress, password)
                     .then(errors => {
