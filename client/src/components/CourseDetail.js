@@ -41,7 +41,9 @@ const CourseDetail = (props) => {
 
     const handleDelete = () => {
         const emailAddress = context.authenticatedUser.emailAddress;
-        const password = context.authenticatedUser.password;
+        // For this function, I am setting the variable "password" by grabbing the value of it from context.authenticatedUser.
+        // I can see in the react dev tools under context.authenticatedUser that the password field is listed under "userPassword"
+        const password = context.authenticatedUser.userPassword;
         context.data.deleteCourse(id, emailAddress, password)
             .then(error => {
                 if(error.length) {

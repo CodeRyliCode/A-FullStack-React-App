@@ -20,7 +20,7 @@ const CreateCourse = (props) => {
 
     const submit = () => {
         const emailAddress = context.authenticatedUser.username;
-        const password = context.authenticatedUser.password;
+        const password = context.authenticatedUser.userPassword;
 
         const newCourse = {
             title,
@@ -30,8 +30,9 @@ const CreateCourse = (props) => {
             userId
         }
 
+
         context.data.createCourse(newCourse, emailAddress, password)
-            .then(errors => {
+                    .then(errors => {
                 if(errors.length) {
                     setErrors(errors);
             } else {
