@@ -9,6 +9,9 @@ const UpdateCourse = (props) => {
     const emailAddress = context.authenticatedUser.emailAddress;
     const password = context.authenticatedUser.password;
     
+
+    // The course state will hold the array of objects returned from the API.
+  // In the then() method below, use the getCourse()function to update the data state with the data returned from the API:
     const [ course, getCourse ] = useState({
         course: [],
         title: " ",
