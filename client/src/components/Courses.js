@@ -3,10 +3,11 @@ import { Link } from 'react-router-dom';
 
 export default class Courses extends Component {
 
+// We have our courses state start off in an empty array 
     state = {
       courses: []
     };
-// We are fetching the courses from the express api, setting the state, and using error handlers
+// We are fetching the courses from the express api, setting the state, and using error handlers if an error arises
     componentDidMount() {
         fetch('http://localhost:5000/api/courses')
           .then(res => res.json())
@@ -37,9 +38,8 @@ export default class Courses extends Component {
             {courseList}
           <Link to="/courses/create" className="course--module course--add--module">
             <span className="course--add--title">
-              <svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
-                  viewBox="0 0 13 13" className="add"><polygon points="7,6 7,0 6,0 6,6 0,6 0,7 6,7 6,13 7,13 7,7 13,7 13,6 "></polygon></svg>
-                      New Course
+
+                     + New Course
             </span>
             </Link>
         </div>

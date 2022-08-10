@@ -13,7 +13,7 @@ const CreateCourse = (props) => {
     
   // The course state will hold the array of objects returned from the API.
   // We use the setCourse()function to update the data state with the data returned from the API:
-    const [ course, setCourse ] = useState({
+    const [ course, updateCourseState ] = useState({
         title: " ",
         description: " ",
         estimatedTime: " ",
@@ -51,7 +51,7 @@ const CreateCourse = (props) => {
     }
 
     
-    const handleChange = (e) => {
+    const makeChange = (e) => {
         let name = e.target.name;
         let value= e.target.value;
 
@@ -63,7 +63,7 @@ const CreateCourse = (props) => {
             name = 'description'
         }
         
-        setCourse({
+        updateCourseState({
             ...course,
             [name]: value
         });
@@ -100,7 +100,7 @@ const CreateCourse = (props) => {
                                         id="courseTitle"
                                         name="courseTitle"
                                         type="text"
-                                        onChange={handleChange}
+                                        onChange={makeChange}
                                         value={course.title} />
                                 </label>
                                 <p>{`By ${context.authenticatedUser.name}`}</p>
@@ -111,7 +111,7 @@ const CreateCourse = (props) => {
                                         id="courseDescription"
                                         name="courseDescription"
                                         type="text"
-                                        onChange={handleChange} 
+                                        onChange={makeChange} 
                                         value={course.description} />
                                 </label>
                             </div>
@@ -123,7 +123,7 @@ const CreateCourse = (props) => {
                                         id="estimatedTime"
                                         name="estimatedTime"
                                         type="text"
-                                        onChange={handleChange} 
+                                        onChange={makeChange} 
                                         value={course.estimatedTime}/>
                             </label>
                   
@@ -133,7 +133,7 @@ const CreateCourse = (props) => {
                                         id="materialsNeeded"
                                         name="materialsNeeded"
                                         type="text"
-                                        onChange={handleChange}
+                                        onChange={makeChange}
                                         value={course.materialsNeeded} />
                             </label> 
                         </div> 

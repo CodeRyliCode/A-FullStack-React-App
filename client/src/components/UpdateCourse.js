@@ -64,7 +64,7 @@ const UpdateCourse = (props) => {
         });   
     }
 
-    const handleChange = (e) => {
+    const makeChange = (e) => {
         let name = e.target.name;
         let value= e.target.value;
 
@@ -113,7 +113,7 @@ const UpdateCourse = (props) => {
                                         id="courseTitle"
                                         name="courseTitle"
                                         type="text"
-                                        onChange={handleChange}
+                                        onChange={makeChange}
                                         value={title} />
                                 </label>
                                 <p>{`By ${course.firstName} ${course.lastName}`}</p>
@@ -124,7 +124,7 @@ const UpdateCourse = (props) => {
                                         id="courseDescription"
                                         name="courseDescription"
                                         type="text"
-                                        onChange={handleChange} 
+                                        onChange={makeChange} 
                                         value={description} />
                                 </label>
                             </div>
@@ -136,7 +136,7 @@ const UpdateCourse = (props) => {
                                         id="estimatedTime"
                                         name="estimatedTime"
                                         type="text"
-                                        onChange={handleChange} 
+                                        onChange={makeChange} 
                                         value={estimatedTime}/>
                             </label>
                   
@@ -146,7 +146,7 @@ const UpdateCourse = (props) => {
                                         id="materialsNeeded"
                                         name="materialsNeeded"
                                         type="text"
-                                        onChange={handleChange}
+                                        onChange={makeChange}
                                         value={materialsNeeded} />
                             </label> 
                         </div> 
