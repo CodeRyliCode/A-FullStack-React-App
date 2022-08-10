@@ -6,8 +6,7 @@ export default class Courses extends Component {
     state = {
       courses: []
     };
-
-  
+// We are fetching the courses from the express api, setting the state, and using error handlers
     componentDidMount() {
         fetch('http://localhost:5000/api/courses')
           .then(res => res.json())

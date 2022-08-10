@@ -1,4 +1,3 @@
-import NotFound from './components/NotFound';
 import config from './config';
 
 

@@ -11,6 +11,8 @@ const CreateCourse = (props) => {
     const userId = context.authenticatedUser.id;
    
     
+  // The course state will hold the array of objects returned from the API.
+  // We use the setCourse()function to update the data state with the data returned from the API:
     const [ course, setCourse ] = useState({
         title: " ",
         description: " ",
