@@ -1,6 +1,9 @@
+import NotFound from './components/NotFound';
 import config from './config';
 
+
 export default class Data {
+
 
   // The first method in the class, api(), is used to make the GET and POST requests to the REST API. 
   // It currently accepts an API endpoint as its first argument (path), followed by the HTTP method, 
@@ -8,6 +11,7 @@ export default class Data {
   api(path, method = 'GET', body = null,  requiresAuth = false, credentials = null) {
     // The url constant configures the request path using the base URL defined in config.js, which gets passed to the returned fetch() method.
     const url = config.apiBaseUrl + path;
+
   
     const options = {
       method,

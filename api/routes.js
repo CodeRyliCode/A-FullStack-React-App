@@ -66,7 +66,7 @@ router.post('/users', asyncHandler(async (req, res) => {
     })
   );
 
-  // Send a GET request to /quotes/:id to READ(view) a quote
+  // Send a GET request to /quotes/:id to READ(view) a course
   //this get method returns a single quote
   
   router.get(

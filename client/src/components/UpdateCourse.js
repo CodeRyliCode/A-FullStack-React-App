@@ -23,7 +23,7 @@ const UpdateCourse = (props) => {
    
  
     useEffect(() => {
-        fetch(`http://localhost:5000/api/courses/${id}`, { method: 'GET' })
+   fetch(`http://localhost:5000/api/courses/${id}`, { method: 'GET' })
             .then(res => res.json())
             .then(response => {
                 getCourse({
