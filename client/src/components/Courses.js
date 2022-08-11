@@ -15,7 +15,10 @@ export default class Courses extends Component {
             this.setState({courses: response})
           })
           .catch(error => {
-            console.log('Error Fetching Data', error);
+            console.log('There was an error fetching data', error);
+                // if there is an error caught, then we will naviagate to localhost:3000/errors
+      // to display a user friendly error message
+      this.props.history.push('/errors');
           });
     };
 

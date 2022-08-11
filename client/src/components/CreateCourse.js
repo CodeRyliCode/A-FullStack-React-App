@@ -46,7 +46,7 @@ const CreateCourse = (props) => {
         })
         .catch(err => {
             console.log('errors:', err)
-            history.push('/error');
+            history.push('/errors');
         });   
     }
 

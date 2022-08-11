@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import Header from "./components/Header";
 import Courses from "./components/Courses";
-import NotFound from "./components/NotFound";
+import PageNotFound from "./components/PageNotFound";
 import SignUp from "./components/SignUp";
 import SignIn from "./components/SignIn";
 import SignOut from "./components/SignOut";
@@ -13,13 +13,15 @@ import PrivateRoute from "./PrivateRoute";
 import CreateCourse from "./components/CreateCourse";
 import UpdateCourse from "./components/UpdateCourse";
 import CourseDetail from "./components/CourseDetail";
+import IdNotFound from "./components/IdNotFound";
+import Errors from "./components/Errors";
 
 const CourseDetailWithContext = withContext(CourseDetail);
 // Connect the Header component to context
 const HeaderWithContext = withContext(Header);
-// This connects the UserSignUp component to context. In other words, UserSignUp is now a consuming component that's subscribed to all context changes.
+// This connects the SignUp component to context. In other words, UserSignUp is now a consuming component that's subscribed to all context changes.
 const SignUpWithContext = withContext(SignUp);
-// Connect UserSignIn to context
+// Connect SignIn to context
 const SignInWithContext = withContext(SignIn);
 const SignOutWithContext = withContext(SignOut);
 const CreateCourseWithContext = withContext(CreateCourse);
@@ -37,18 +39,17 @@ export default class App extends Component {
             path="/courses/create"
             component={CreateCourseWithContext}
           />
-          {/* Redirect from /courses, from will be equal to pathname: "/courses".
-        redirect from last route url you were on before signing in */}
           <PrivateRoute
             path="/courses/:id/update"
             component={UpdateCourseWithContext}
-          />
-          <Route path="/courses/:id" component={CourseDetailWithContext} />
-          <Route path="/signin" component={SignInWithContext} />
+          />{" "}
           <Route path="/signup" component={SignUpWithContext} />
+          <Route path="/courses/:id" component={CourseDetailWithContext} />
           <Route path="/signout" component={SignOutWithContext} />
-          <Route path="/error" component={Error} />
-          <Route component={NotFound} />
+          <Route path="/signin" component={SignInWithContext} />
+          <Route path="/error" component={IdNotFound} />
+          <Route path="/errors" component={Errors} />
+          <Route component={PageNotFound} />
         </Switch>
       </BrowserRouter>
     );

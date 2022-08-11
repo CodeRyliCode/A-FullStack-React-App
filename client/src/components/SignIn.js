@@ -79,13 +79,16 @@ export default class SignIn extends Component {
           return { errors: [ 'Sign-in was unsuccessful' ] };
         });
         } else {
+          // the from paramter means we are going to redirect user to url they were last at once they are authenticated and signed in
           this.props.history.push(from);
           console.log(`SUCCESS! ${emailAddress} is now signed in!`);
         }
     })
     .catch((err) => {
       console.log(err);
-      this.props.history.push('/error');
+      // During sign in, if there is an error caught, then we will naviagate to localhost:3000/errors
+      // to display a user friendly error message
+      this.props.history.push('/errors');
   });
 }
 

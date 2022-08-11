@@ -38,8 +38,15 @@ export default class SignUp extends Component {
       })
       .catch((err) => {
         console.log(err);
+            //if there is an error caught, then we will naviagate to localhost:3000/errors
+      // to display a user friendly error message
+      this.props.history.push('/errors');
       });
 
+
+//    we are grabbing the actions of signIn from our context File. They are working together.
+//  That's why have a connection for both in our App.js file. We Connect SignIn to context
+// like so  --->   const SignInWithContext = withContext(SignIn);
     context.actions
       // signIn() is an asynchronous operation that returns a promise.
       .signIn(user.emailAddress, user.password)
@@ -55,6 +62,9 @@ export default class SignUp extends Component {
       })
       .catch((err) => {
         console.log(err);
+            // if there is an error caught, then we will naviagate to localhost:3000/errors
+      // to display a user friendly error message
+      this.props.history.push('/errors');
       });
   };
 
@@ -92,7 +102,7 @@ export default class SignUp extends Component {
                   id="firstName"
                   name="firstName"
                   type="text"
-                  onChange={this.makechange}
+                  onChange={this.makeChange}
                   value={firstName}
                 />
               </label>

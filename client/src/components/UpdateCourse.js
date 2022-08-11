@@ -21,12 +21,13 @@ const UpdateCourse = (props) => {
         firstName: " ",
         lastName: " "
     });
+
     const [ errors, setErrors ] = useState([]);
     const { id } = useParams();
    
  
     useEffect(() => {
-   fetch(`http://localhost:5000/api/courses/${id}`, { method: 'GET' })
+   fetch(`http://localhost:5000/api/courses/${id}`)
             .then(res => res.json())
             .then(response => {
                 getCourse({
@@ -41,6 +42,9 @@ const UpdateCourse = (props) => {
         })
         .catch(error => {
             console.log('There is an Error Fetching the Data', error);
+                // if there is an error caught, then we will naviagate to localhost:3000/errors
+      // to display a user friendly error message
+      this.props.history.push('/errors');
         });
     }, [id]);
 

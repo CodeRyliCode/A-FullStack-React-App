@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { NavLink, useParams, useHistory } from "react-router-dom";
 import ReactMarkDown from "react-markdown";
-import NotFound from "./NotFound";
 
 const CourseDetail = (props) => {
-
   // the useHistory hooks lets you access the history instance used by React Router.
   // It can be helpful in redirecting your users to another page
   const history = useHistory();
-  // Through context, we have universal centralzied data for the application that is 
+  // Through context, we have universal centralzied data for the application that is
   // allowing us to pass data and methods to the Components through moving props. We can move the props
   // from grandparent to parent to child and so on.
   const { context } = props;
@@ -30,7 +28,7 @@ const CourseDetail = (props) => {
   // Add the useEffect() Hook. The Hook takes a callback function,
   // which makes the fetch request using a set of JavaScript promises.
   useEffect(() => {
-    fetch(`http://localhost:5000/api/courses/${id}`, { method: "GET" })
+    fetch(`http://localhost:5000/api/courses/${id}`)
       .then((res) => res.json())
       .then((response) => {
         getCourse({
@@ -44,36 +42,19 @@ const CourseDetail = (props) => {
         });
       })
       .catch((error) => {
-        console.log("There was an Error Fetching Data", error);
+        console.log("No Course Found", error);
+        history.push("/error");
       });
-  }, [id]);
+  }, [id, history]);
 
-  const idNotFound = () => {
- 
-  //  With context.data I am accessing the getCourse routing api from my data.js file
-    context.data
-      .getCourse(id)
-      .then((error) => {
-        if (error.length) {
-return <NotFound />
-        } else {
-     this.history.props.push('/');
-        }
-      })
-      .catch((err) => {
-        console.log("error:", err);
-      });
-  };
-
-  
-      // this is the logic and function for the Delete Course button. We use an
+  // this is the logic and function for the Delete Course button. We use an
   // event.preventdefault to prevent the browser from reloading/refreshing
   // once the button gets clicked in our onClick element below.
   const toDelete = () => {
     // We are accessing these parameters from Context.js
     const emailAddress = context.authenticatedUser.emailAddress;
     const password = context.authenticatedUser.password;
-  //  With context.data I am accessing the deleteCourse routing api from my data.js file
+    //  With context.data I am accessing the deleteCourse routing api from my data.js file
     context.data
       .deleteCourse(id, emailAddress, password)
       .then((error) => {
@@ -86,6 +67,9 @@ return <NotFound />
       })
       .catch((err) => {
         console.log("error:", err);
+            // if there is an error caught, then we will naviagate to localhost:3000/errors
+      // to display a user friendly error message
+      this.props.history.push('/errors');
       });
   };
 
@@ -151,9 +135,8 @@ return <NotFound />
 
   return (
     <main>
-
-      
-      {courseDetails}  {actionButtons}
+      {actionButtons}
+      {courseDetails}
     </main>
   );
 };
