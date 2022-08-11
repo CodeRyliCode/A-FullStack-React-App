@@ -26,12 +26,12 @@
   .wrap {
     max-width: 1250px;
     margin: 0 auto;
-    padding: 0 1rem;
+    padding: 0 5rem;
   }
   header {
     background: #5dc1ba;
     color: #fff;
-    padding: 1rem 0;
+    padding: 1.5rem 0;
     margin-bottom: 2rem;
   }
   .header--flex {
@@ -47,7 +47,7 @@
     font-size: .8rem;
   }
   header nav a {
-    color: #dbd;
+    color: #b8e7e7;
   }
   header nav a:hover {
     color: #fff;
@@ -112,18 +112,18 @@
     line-height: 1.5;
   }
   .actions--bar {
-    background: #e9e5f0;
+    background: #fff;
     padding: 1rem 0;
     margin: -2rem 0 2rem;
   }
   .validation--errors {
-    background: #e9e5f0;
+    background: #e5f9f8;
     padding: 1rem;
     border-radius: .5rem;
     margin-bottom: 2.5rem;
   }
   .validation--errors h3 {
-    color: #800;
+    color: rgb(255, 0, 0);
     font-size: 1.25rem;
     margin-bottom: .5rem;
   }
