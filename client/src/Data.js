@@ -1,4 +1,3 @@
-import NotFound from "./components/PageNotFound";
 import config from "./config";
 
 export default class Data {
