@@ -36,6 +36,7 @@ const CreateCourse = (props) => {
             userId
         }
 
+    //  With context.data I am accessing the createCourse routing api from my data.js file
         context.data.createCourse(newCourse, emailAddress, password)
                     .then(errors => {
                 if(errors.length) {
@@ -50,7 +51,8 @@ const CreateCourse = (props) => {
         });   
     }
 
-    
+    // When changes are made to create and add a course, we are using the current name and value 
+    // that is being input by the user so we can save it to our variable and update the course state
     const makeChange = (e) => {
         let name = e.target.name;
         let value= e.target.value;

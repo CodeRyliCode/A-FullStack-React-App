@@ -59,16 +59,6 @@ export default class Data {
   }
 
 
-  async getCourse(id, emailAddress, password) {
-    const response = await this.api("/courses/", "GET", id);
-    if (response.status === 201) {
-      return [];
-    } else if (response.status === 404) {
-      return <NotFound />;
-    } else {
-      throw new Error();
-    }
-  }
 
   async updateCourse(courseUpdate, id, emailAddress, password) {
     const response = await this.api(
